@@ -1,4 +1,3 @@
-import './App.css';
 import { Button, ChakraProvider } from '@chakra-ui/react';
 import theme from "./theme/theme"
 
