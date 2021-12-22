@@ -1,7 +1,6 @@
-import { memo, ReactNode, VFC } from "react"
+import { memo, VFC } from "react"
 import { Box, Stack, Image, Text } from '@chakra-ui/react'
 
-import { Button } from "@chakra-ui/react"
 
 type Props = {
   imageUrl: string,
