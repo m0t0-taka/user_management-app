@@ -9,18 +9,50 @@ export const Header: VFC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate()
 
-  const onClickHome = useCallback(() => navigate("/home"), [navigate])
-  const onClickUserManagement = useCallback(() => navigate("/home/user_management"), [navigate])
-  const onClickSetting = useCallback(() => navigate("/home/setting"), [navigate])
+  // const onClickHome = useCallback(
+  //   () => navigate("/home"), [])
+  const onClickHome = useCallback(() => {
+    navigate("/home")
+    onClose()
+  }, [navigate, onClose])
+  const onClickUserManagement = useCallback(() => {
+    navigate("/home/user_management")
+    onClose()
+  },[navigate, onClose])
+  const onClickSetting = useCallback(() => {
+    navigate("/home/setting")
+    onClose()
+  }, [navigate, onClose])
+
   return(
     <>
-      <Flex as="nav" bg="teal.500" color="gray.50" align="center" justify="space-between" padding={{ base: 3, md: 5 }}>
-        <Flex align="center" as="a" mr={8} _hover={{ cursor: "pointer" }} onClick={onClickHome}>
+      {/* Flexを使用することでレスポンシブ対応ができる */}
+      <Flex
+        as="nav"
+        bg="teal.500"
+        color="gray.50"
+        align="center"
+        justify="space-between"
+        padding={{ base: 3, md: 5 }}
+      >
+        <Flex
+          align="center"
+          as="a"
+          mr={8}
+          _hover={{ cursor: "pointer" }}
+          onClick={onClickHome}
+        >
+          {/* Breakpointを使ってサイズを変更する */}
           <Heading as="h1" fontSize={{ base: 'md', ma: "lg" }}>
             ユーザ管理アプリ
           </Heading>
         </Flex>
-        <Flex align="center" fontSize="sm" flexGrow={2} display={{ base:"none", md: "flex" }}>
+        <Flex
+          align="center"
+          fontSize="sm"
+          flexGrow={2}
+          display={{ base:"none", md: "flex" }}
+        >
           <Box pr={4}>
             <Link onClick={onClickUserManagement}>ユーザー一覧</Link>
           </Box>
@@ -28,7 +60,13 @@ export const Header: VFC = memo(() => {
         </Flex>
         <MenuIconButton onOpen={onOpen}/>
       </Flex>
-      <MenuDrawer onClose={onClose} isOpen={isOpen} onClickHome={onClickHome} onClickUserManagement={onClickUserManagement} onClickSetting={onClickSetting} />
+      <MenuDrawer
+        onClose={onClose}
+        isOpen={isOpen}
+        onClickHome={onClickHome}
+        onClickUserManagement={onClickUserManagement}
+        onClickSetting={onClickSetting}
+      />
     </>
   )})
 
